@@ -1,0 +1,39 @@
+{% load widget_tweaks %}
+
+<form method="POST">
+
+    {% csrf_token %}
+    {% render_field form.date class="form-control" placeholder="date" %}
+
+    {% render_field form.start_time class="form-control" placeholder="start_time" %}
+
+    {% render_field form.end_time class="form-control" placeholder="end_time" %}
+
+    {% render_field form.title class="form-control" placeholder="titile" %}
+
+    {% render_field form.job class="form-control" placeholder="job" %}
+
+    <td>
+        <select  name="username">
+            {% for users in member  %}
+            <option value="{{ users.name }}">{{ users.name}}</option>
+            {% endfor %}
+
+        </select>
+    </td>
+
+    {% render_field form.location class="form-control" placeholder="location" %}
+
+    {% render_field form.note class="form-control" placeholder="note" %}
+    {% render_field form.tz1 class="form-control" placeholder="tz1" %}
+
+
+    <button type="submit">save</button>
+
+
+
+
+
+
+
+</form>

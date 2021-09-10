@@ -1,0 +1,105 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+{% load static %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+  <div class="row" style="margin-top:25px;padding-left: 30px;margin-right: 30px;">
+    <table class="table table-striped" id="" cellspacing="0" cellpadding="0">
+      {% comment %} <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div> {% endcomment %}
+      <div class="container">
+        <form method="POST" role="form">
+          {% csrf_token %}
+          <div style="display: flex; justify-content: center;">
+            <div>
+              <div >User: <input style='width:150px; ' type="text" name="user"></div>
+            </div>
+            <div>
+              <div>From: <input  style='width:150px; ' type="date" name="start_time"></div>
+            </div>
+            <div>
+              <div>To: <input  style='width:150px; '  type="date" name="end_time"></div>
+            </div>
+            <div style="min-width: 220px; display: flex; align-items: flex-end; margin: 0 5px">
+              <div >
+                <button type="submit" style = ' background-color:#ffad33; /* Green */border-radius:10px;color: white;padding: 2px 20px;text-align: center;text-decoration: none; display: inline-block;font-size: 16px;'>Search</button>
+              <a  href="{% url 'shift' %}" style = ' background-color:#ffad33;  /* Green */border-radius:10px;color: white;padding: 2px 20px;text-align: center;text-decoration: none; display: inline-block;font-size: 16px;'>Calendar</a>
+            
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+
+
+  <div class="container" style="margin-top: 40px;">
+    <div class="row">
+      <div class="col-sm">
+        <div style = 'color:black; font-weight: bold;'>Shift title:</div>
+      </div>
+      <div class="col-sm">
+        <div style = 'color:black; font-weight: bold;'>Date </div>
+      </div>
+      <div class="col-sm"  style = 'color:black; font-weight: bold;'>
+        Users
+      </div>
+      <div class="col-sm"  style = 'color:black; font-weight: bold;'>
+        Set time
+      </div>
+      <div class="col-sm" style = 'color:black; font-weight: bold;'>
+        Task
+      </div>
+     
+    </div>
+  </div>
+</div>
+{% for shift in shifts%}
+<div class="container" style="margin-top: 40px;">
+  <div class="row">
+    <div class="col-sm">
+      <div>{{shift.title}}</div>
+    </div>
+    <div class="col-sm">
+      <div>{{shift.date}} </div>
+    </div>
+    <div class="col-sm">
+      {{shift.username}}
+    </div>
+    <div class="col-sm">
+      {{shift.start_time}}- {{shift.end_time}}
+    </div>
+    <div class="col-sm">
+      Task
+    </div>
+  
+   
+  </div>
+</div>
+
+</div>
+{% endfor %}
+
+
+</table>
+<br>
+<button style="border-radius: 15px;"><a href="{% url 'shift' %}">Back</a></button>
+
+</div>
+
+</div>
+
+
+{% endblock content %}

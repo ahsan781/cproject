@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<html>
+    <head>
+        {% include 'account/head.html' %}
+    </head>
+    <body>
+        {% include 'header.html' %}
+        {% block content %} {% endblock content %}
+        {% include 'footer.html' %}
+        {% include 'scripts.html' %}
+    </body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <style>
+        textarea {
+            resize: none;
+        }
+
+        .form-label {
+            font-size: 12px;
+            color: #5e9bfc;
+            margin: 0;
+            display: block;
+            opacity: 1;
+            -webkit-transition: .333s ease top, .333s ease opacity;
+            transition: .333s ease top, .333s ease opacity;
+        }
+
+        .form-control {
+            border-radius: 0;
+            border-color: #ccc;
+            border-width: 0 0 2px 0;
+            border-style: none none solid none;
+            box-shadow: none;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #5e9bfc;
+        }
+
+        .js-hide-label {
+            opacity: 0;
+        }
+
+        .js-unhighlight-label {
+            color: #999
+        }
+
+        .btn-start-order {
+            background: 0 0 #ffffff;
+            border: 1px solid #2f323a;
+            border-radius: 3px;
+            color: #2f323a;
+            font-family: "Raleway", sans-serif;
+            font-size: 16px;
+            line-height: inherit;
+            margin: 30px 0;
+            padding: 10px 50px;
+            text-transform: uppercase;
+            transition: all 0.25s ease 0s;
+        }
+
+        .btn-start-order:hover,
+        .btn-start-order:active,
+        .btn-start-order:focus {
+            border-color: #5e9bfc;
+            color: #5e9bfc;
+        }
+    </style>
+</head>
+
+<body>
+
+    {% load widget_tweaks %}
+    {% load crispy_forms_tags %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                <h2>Template Edit</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-4">
+                <form  action="/edit1/{{id.id}}/"  method="POST"  enctype="multipart/form-data">
+                 {% csrf_token %}
+                    <div class="form-group">
+                        <label class="form-label" >Title</label>
+                        {% render_field form.title1 name="title1"  class="form-control" placeholder="form.title1"  %}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" >Date</label>
+                        {% render_field form.date1  name="date1" class="form-control" placeholder="form.date1" %}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" >Start Time</label>
+                        {% render_field form.start_time1  name="stime1" class="form-control" placeholder="form.start_time1"  %}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" >End Time</label>
+                        {% render_field form.end_time1 name="etime1" class="form-control" placeholder="form.end_time1"  %}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" >location</label>
+                        {% render_field form.location1 name="location1"  class="form-control" placeholder="form.location1"  %}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" >Tz1</label>
+                        {% render_field form.tz11 name="tz1"  class="form-control" placeholder="form.tz11"  %}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" >User Name</label>
+                        {% render_field form.username1  name="username1" class="form-control" placeholder="form.username1" %}
+                    </div>
+                     <div class="form-group">
+                        <label class="form-label" >Image</label>
+                        {% render_field form.note name="file" class="form-control" placeholder="form.note" %}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" >NOTE</label>
+                        {% render_field form.text1  name="text" class="form-control" placeholder="form.tex1t" %}
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-start-order">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% comment %} <form method="POST">
+        {% csrf_token %}
+        {{form}}
+
+        <button type="submit">save</button>
+    </form> {% endcomment %}
+
+</body>
+
+</html>

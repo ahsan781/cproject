@@ -1,0 +1,23 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign Up Closed" %}{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 8%;">
+    <main id="main">
+        <div class="container" style="table-layout: display; width:600px; margin-bottom:10%;">
+            <div class="card"
+                style="padding-left: 2%; padding-right:2%; padding-top:2%; padding-bottom:2%; background-color:rgb(217, 231, 231)">
+                style="padding-left: 2%; padding-right:2%; padding-top:2%; padding-bottom:2%; background-color:rgb(217,
+                231, 231)">
+
+                <h1>{% trans "Sign Up Closed" %}</h1>
+
+                <p>{% trans "We are sorry, but the sign up is currently closed." %}</p>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}

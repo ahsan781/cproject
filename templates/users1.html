@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+{% load static %}
+{% load widget_tweaks %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=1024">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard</title>
+    <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="{% static 'assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="./userstyle.css">
+    <link href="{% static 'assets/css/sb-admin-2.min.css' %}" rel="stylesheet">
+    <style>
+        body {
+            padding: 10px;
+            background-color: white;
+            color: black;
+        }
+
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+
+        #exportbtn {
+            font-size: 10px;
+            width: 70px;
+        }
+
+        #filter {
+            font-size: 10px;
+            width: 70px;
+        }
+
+        #hivb {
+            font-size: 10px;
+            background-color: #f0c14b;
+            color: #fff;
+            width: 90px;
+        }
+
+        #confirmbtn {
+            background-color: #f0c14b;
+            ;
+            color: #fff;
+        }
+
+        #firstname {
+            width: 120px;
+            height: 25px;
+            font-size: 13px;
+        }
+
+        #phone {
+            width: 120px;
+            height: 25px;
+            font-size: 13px;
+        }
+
+        #mobilepagra {
+            margin-left: 68px;
+        }
+
+        #modalbg {
+            background-color: white;
+        }
+
+        #modaltable {
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        #searchhh {
+            border-radius: 20px;
+        }
+
+        .myimg {
+            height: 100px;
+            margin-right: auto;
+            margin-left: auto;
+            display: block;
+        }
+
+        #listhead {
+            font-size: 10px;
+        }
+
+        #exampleModalLabel {
+            margin-right: auto;
+            display: block;
+
+        }
+
+        .titiel p {
+            text-align: center;
+        }
+
+        #adduserbtn {
+            margin-right: auto;
+            margin-left: auto;
+            display: block;
+            background-color: #f0c14b;
+            color: #fff;
+            border-radius: 20px;
+        }
+
+        table {
+            font-size: 13px;
+        }
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .filterDiv {
+            float: left;
+            background-color: #f0c14b;
+            color: #ffffff;
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+            margin: 2px;
+            display: none;
+        }
+
+        #phoneimg {
+            margin-bottom: -60px;
+            height: 50px;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .container {
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        /* Style the buttons */
+        .btn {
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #ddd;
+        }
+
+        .btn.active {
+            background-color: #666;
+            color: white;
+        }
+
+        .btn {
+            border-radius: 15px;
+            border-color: coral;
+            width: 150px;
+            margin-right: 16px;
+            color: #f0c14b;
+
+        }
+
+        .button button {
+            width: 200px;
+
+        }
+
+        }
+
+        @media screen and (width: 814px) {
+            #page-top {
+                width: 100% !important;
+                font-size: 1.5em;
+            }
+
+            #wrapper {
+                width: 100%;
+            }
+
+            .tab {}
+
+            .tablinks {
+                margin: 0;
+            }
+
+            .tabcontent {
+                width: 100%;
+            }
+
+
+        }
+    </style>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+
+                <div class="sidebar-brand-text mx-3">Connecteam <sup>2</sup></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Users</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">User Screens:</h6>
+                        <a class="collapse-item" href="login.html">Users</a>
+
+                    </div>
+            </li>
+            <!-- Divider -->
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'shiftscheduler' %}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Job scheduling</span></a>
+            </li>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{request.user}}</span>
+                                <img class="img-profile rounded-circle"
+                                    src="{% static 'assets/img/undraw_profile.svg' %}">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="{% url 'userdashboard' %}">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Switch to user's view
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                                <button onclick="myFunction()" style="margin-left: 40px;border-radius: 15px;">Change
+                                    mode </button>
+
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+                    </div>
+                    <!-- Content Row -->
+                    <div class="row">
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-12">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters">
+                                        <div class="col mr-1">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+                                                style="margin-top: 10px;font-size: 20px;margin-left: 10px;">
+                                                <span style="margin-left: 30px;"> <i class="fa fa-user"></i> <span
+                                                        class="text-dark">Users</span></span>
+                                            </div>
+                                        </div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            <button class="btn"> <i class="fa fa-qrcode"></i> QR Code</button>
+                                        </div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            <button class="btn"> <i class="fa fa-link"></i> Invite Link</button>
+                                        </div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            <button class="btn"> <i class="fa fa-download"></i> Import User</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Pending Requests Card Example -->
+                        <!-- add filter here -->
+                        <div class="row" style="width: 100%;margin-left: 1px;">
+                            <!-- Area Chart -->
+                            <div class="col-xl-12">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div id="demo">
+                                        <div class="tab">
+                                            <button class="tablinks" onclick="openCity(event, 'London')"
+                                                id="defaultOpen">Mobile User</button>
+                                            <button class="tablinks" onclick="openCity(event, 'Paris')">Admins</button>
+                                            <button class="tablinks"
+                                                onclick="openCity(event, 'Tokyo')">Archived</button>
+                                        </div>
+
+
+
+                                        <div style="display: flex; justify-content: space-between; margin: 10px 15px">
+                                            <div>
+                                                <button class="btn btn-primary" id="filter"> <i
+                                                        class="fa fa-align-center"></i> Filter</button>
+                                            </div>
+                                            <div style="display: flex;">
+                                                <div class="form-group">
+                                                    <input placeholder="search" type="text" class="form-control"
+                                                        id="searchhh" />
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-primary mr-auto" id="exportbtn"> <i
+                                                            class="fa fa-sign-in"></i> Export</button>
+                                                    <button class="btn btn-primary mr-auto" data-toggle="modal"
+                                                        data-target="#exampleModal" id="hivb"><i class="fa fa-plus"></i>Add
+                                                        User</button>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div id="London" class="tabcontent">
+                                            <div class="container">
+                                                <div class="col-sm-12" >
+
+                                                    <div style="overflow-x: scroll;">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+    
+                                                                    <th> <input class="" type="checkbox" value="" id="">
+                                                                    </th>
+    
+                                                                    <th scope="col">First name</th>
+                                                                    <th scope="col">Last name</th>
+                                                                    <th scope="col">Title</th>
+                                                                    <th scope="col">Employee Start date</th>
+                                                                    <th scope="col">Team</th>
+                                                                    <th scope="col">Departmenet</th>
+                                                                    <th scope="col">Date added</th>
+                                                                    <th scope="col">Last mobile login</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for alluser in adduser %}
+                                                                <tr>
+                                                                    <td></td>
+                                                                    <td>{{alluser.first_name }}</td>
+                                                                    <td>{{alluser.last_name }}</td>
+                                                                    <td>{{alluser.email }}</td>
+                                                                    <td>Designer</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>18/07/2021</td>
+                                                                    <td>Never Login</td>
+    
+                                                                </tr>
+                                                                {% endfor %}
+    
+                                                                {% for adminusers in adminuser %}
+    
+                                                                <tr>
+                                                                    <td></td>
+                                                                    <td>{{ adminusers.first_name }}</td>
+    
+    
+                                                                </tr>
+                                                                {% endfor %}
+    
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="gifimages">
+                                                        <img src="../static/assets/img/a.gif"
+                                                            class="img-responsive myimg" id="/>
+                                                                    </div>
+                                                                     <div class=" titiel">
+                                                        <h3 class="text-center text-dark">Connect your users!</h3>
+                                                        <p class="text-center">Continue by adding more Mobile Users for
+                                                            free! <br />
+                                                            Mobile users can only login to the mobile app.</p>
+                                                    </div>
+
+                                                    <div class="adduserbtn">
+                                                        <button class="btn btn-primary" id="adduserbtn"><i
+                                                                class="fa fa-plus"></i>Add Users</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="Paris" class="tabcontent">
+                                            <div class="container">
+                                                <div class="col-sm-12">
+                                                    <table class="table">
+                                                        <thead id="listhead">
+                                                            <tr>
+                                                                <th> <input class="" type="checkbox" value="" id="">
+                                                                </th>
+                                                                <th scope="col">First name</th>
+                                                                <th scope="col">Last name</th>
+                                                                <th scope="col">Email</th>
+                                                                <th scope="col">Permission</th>
+                                                                <th scope="col">Assigned group</th>
+                                                                <th scope="col">Assigned features</th>
+                                                                <th scope="col">Admin tab</th>
+                                                                <th scope="col">Accepted</th>
+                                                                <th scope="col">Last mobile login</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for adminuser in adminusers %}
+                                                            <tr>
+                                                                <td></td>
+                                                                <td>{{adminuser.first_name }}</td>
+                                                                <td>{{adminuser.last_name }}</td>
+                                                                <td>{{adminuser.email}}</td>
+                                                                <td>Owner</td>
+                                                                <td>All groups</td>
+                                                                <td>All features</td>
+                                                                <td><i class="fa fa-check"></i></td>
+                                                                <td>Never Login</td>
+                                                            </tr>
+                                                            {% endfor %}
+
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="gifimages">
+                                                        <img src="../static/assets/img/b.gif"
+                                                            class="img-responsive myimg" id="/>
+                                                                      </div>
+                                                                       <div class=" titiel">
+                                                        <h3 class="text-center text-dark">Managing is better together!
+                                                        </h3>
+                                                        <p class="text-center">Add more admins to test the app with you
+                                                            <br />
+                                                            admins can access the mobile app and the launchpad
+                                                        </p>
+                                                    </div>
+                                                    <div class="adduserbtn">
+                                                        <button class="btn btn-primary" id="adduserbtn"><i
+                                                                class="fa fa-plus"></i>Add Admins</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="Tokyo" class="tabcontent">
+                                            <div class="container">
+                                                <div class="col-sm-12">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- modal -->
+                                        <div class="w3-modal-content w3-animate-bottom modal" id="exampleModal"
+                                            tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-xl" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Add users</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+
+
+                                                    <div class="modal-body " id="modaltable">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-md-1">
+                                                                    <img src="../static/assets/img/mobile.png" id="phoneimg"
+                                                                        class="img-responsive" />
+                                                                </div>
+                                                                <div class="col-md-11">
+                                                                    <h5 class="ml-3 mt-3">Add mobile users</h5>
+                                                                </div>
+                                                                <p id="mobilepagra">Mobile users can only login to the
+                                                                    mobile app.</p>
+                                                            </div>
+                                                            <div class="row">
+                                                                <form method="POST" style="width: 100%;">
+                                                                    <table class="table table-striped" style="width: 100%;">
+                                                                        {% csrf_token %}
+                                                                        <tbody class="appending_div">
+                                                                            <tr style="width: 100%;">
+                                                                                <td style="width: 25%;">First Name: <br/><input type="text"
+                                                                                        name="first_name" style="width: 100%; font-size: 10px;"></td>
+                                                                                <td style="width: 25%;">Last Name: <br/><input style="width: 100%; font-size: 10px;" type="text"
+                                                                                        name="last_name"></td>
+                                                                                <td style="width: 25%;">Email: <br/><input style="width: 100%; font-size: 10px;" type="text" name="email">
+                                                                                </td>
+                                                                                <td style="width: 25%;">Mobile<br/><input style="width: 100%; font-size: 10px;" type="text" name="mobile">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <button type="submit">Add</button>
+                                                                </form>
+                                                                <div class="row">
+                                                                    <a class="nav-link text-center add" href="#"> <i
+                                                                        class="fa fa-plus"></i> Add More</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-check ml-3 row">
+                                                                <input type="checkbox" class="form-check-input"
+                                                                    id="exampleCheck1">
+                                                                <label class="form-check-label" for="exampleCheck1">Send an
+                                                                    invite</label>
+                                                            </div>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- /.container-fluid -->
+
+        </div>
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="margin-left: -10px;">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="{% url 'login' %}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'assets/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'assets/js/sb-admin-2.min.js' %}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{% static 'assets/vendor/chart.js/Chart.min.js' %}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{% static 'assets/js/demo/chart-area-demo.js' %}"></script>
+    <script src="{% static 'assets/js/demo/chart-pie-demo.js' %}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        AOS.init();
+
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+        filterSelection("all")
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("column");
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                w3RemoveClass(x[i], "show");
+                if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+            }
+        }
+
+        function w3AddClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                if (arr1.indexOf(arr2[i]) == -1) { element.className += " " + arr2[i]; }
+            }
+        }
+
+        function w3RemoveClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                while (arr1.indexOf(arr2[i]) > -1) {
+                    arr1.splice(arr1.indexOf(arr2[i]), 1);
+                }
+            }
+            element.className = arr1.join(" ");
+        }
+
+
+        // Add active class to the current button (highlight it)
+        var btnContainer = document.getElementById("myBtnContainer");
+        var btns = btnContainer.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+    </script>
+    <script>
+        function myFunction() {
+            document.getElementById("demo").innerHTML = AdminUesr();
+        }
+    </script>
+    <script>
+        function myFunction() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+        }
+    </script>
+
+    <script>
+        var max_fields = 10;
+        var wrapper = $(".input_fields_wrap");
+        var add_button = $(".add_field_button");
+        var remove_button = $(".remove_field_button");
+
+        $(add_button).click(function (e) {
+            e.preventDefault();
+            var total_fields = wrapper[0].childNodes.length;
+            if (total_fields < max_fields) {
+                $(wrapper).append('<input type="text" name="answer[]" class="field-long" />');
+            }
+        });
+        $(remove_button).click(function (e) {
+            e.preventDefault();
+            var total_fields = wrapper[0].childNodes.length;
+            if (total_fields > 1) {
+                wrapper[0].childNodes[total_fields - 1].remove();
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var i = 1;
+            $('.add').on('click', function () {
+                var field = ` <tr style="width: 100%;">
+                          <td style="width: 25%;">First Name: <input type="text" style="width: 100%; font-size: 10px;" name="first_name"></td>
+                          <td style="width: 25%;">Last Name:  <input type="text" style="width: 100%; font-size: 10px;" name="last_name"></td>
+                          <td style="width: 25%;">Email: <input type="text" style="width: 100%; font-size: 10px;" name="email"> </td>
+                          <td style="width: 25%;">Mobile<input type="text" style="width: 100%; font-size: 10px;" name="mobile"> </td>
+                         </tr>`;
+                $('.appending_div').append(field);
+                i = i + 1;
+            })
+        })
+    </script>
+
+
+
+</body>
+
+</html>

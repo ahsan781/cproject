@@ -1,0 +1,286 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+{% load static %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+<style type="text/css">
+  .table th {
+    vertical-align: baseline !important;
+    text-align: center;
+  }
+
+  #div2 .table th {
+    min-width: 150px;
+  }
+
+  #div1 .table ul {
+    padding: 5px;
+  }
+
+  #div1 .table li {
+    padding: 9px;
+    border: 2px solid #f0c14b;
+    background: lightgray;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    list-style: none;
+  }
+
+  #div1 .table li a {
+    color: #fff;
+  }
+
+  .selectBy {
+    height: 40px !important;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--blue);
+    border: 2px solid var(--blue);
+  }
+
+  .selectBy {
+    height: 40px !important;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--blue);
+    border: 2px solid var(--blue);
+  }
+
+  .week-card {
+    display: block;
+    background: lightgray;
+    min-width: 140px;
+    color: black;
+    border-radius: 4px;
+    padding: 5px 0 5px 10px;
+    margin: 5px 0;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: all-scroll;
+    border: 2px solid #f0c14b;
+  }
+
+  .week-card1 {
+    display: block;
+    background: lightgray;
+    min-width: 140px;
+    color: black;
+    border-radius: 4px;
+    padding: 5px 0 5px 10px;
+    margin: 5px 0;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: all-scroll;
+    border: 2px solid #f0c14b;
+  }
+
+  .week-btn {
+    border: none;
+    background: none;
+    color: #fff;
+    float: right;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  #div3 tr td,
+  #div3 th {
+    padding: 8px;
+    background: #bfbcbc;
+    border: 0.5px solid #d9d9d9;
+  }
+
+  .bg-white {
+    background: #fff;
+  }
+
+  #myModal2 .modal-dialog {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    max-height: 100vh;
+  }
+  #myModal .modal-dialog {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    max-height: 100vh;
+  }
+
+  #myModal2 .modal-content {
+    max-height: 100vh;
+  }
+   #myModal .modal-content {
+    max-height: 100vh;
+  }
+
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    z-index: 1;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .reportrange {
+    background: #fff;
+    cursor: pointer;
+    padding: 8px 5px;
+    border: 1px solid;
+    border-radius: 50px;
+    color: var(--blue);
+  }
+
+  #hivb {
+    font-size: 10px;
+    width: 30%;
+    margin-left: 30px;
+    background-color: #f0c14b;
+    ;
+    color: #fff;
+  }
+  .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+  @media screen and (width: 814px) {
+    .mb-4 {
+      width: 100%;
+      font-size: 1.5em;
+    }
+  }
+
+
+
+  #tab-4 {
+    float: right;
+    width: 19%;
+    height: 100%;
+    background-color: gray;
+  }
+
+  .btn-minimize {
+    width: 50px;
+    height: 50px;
+    background-color: lightgray;
+  }
+
+  .btn-minimize.btn-plus {
+    background-color: #f0c14b;
+  }
+
+  .today-btns {
+    border-radius: 10px;
+    background-color: #f0c14b;
+    color: white;
+  }
+</style>
+               <a  class="btn btn-primary"   href="{% url 'shift' %}" >Calender page</a>
+    <div  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+
+      <!-- Tab panes -->
+
+      <!-- Modal Body -->
+        <div class="modal-body">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#tab-1">Edit Template</a>
+          </li>
+
+        <div class="tab-content">
+
+          <div id="tab-1" class="container tab-pane active">
+           <form  action="/edit/{{id.id}}/"  method="POST"  enctype="multipart/form-data">
+                 {% csrf_token %}
+                    <div class="form-group">
+                        <label class="form-label" >Title</label>
+                        {% render_field form.title class="form-control" placeholder="form.title1"  %}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" >Date</label>
+                        {% render_field form.date class="form-control" placeholder="form.date1" %}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" >Start Time</label>
+                        {% render_field form.start_time class="form-control" placeholder="form.start_time1"  %}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" >End Time</label>
+                        {% render_field form.end_time class="form-control" placeholder="form.end_time1"  %}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" >location</label>
+                        {% render_field form.location class="form-control" placeholder="form.location1"  %}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" >Tz1</label>
+                        {% render_field form.tz1 class="form-control" placeholder="form.tz11"  %}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" >User Name</label>
+                        {% render_field form.username class="form-control" placeholder="form.username1" %}
+                    </div>
+                     <div class="form-group">
+                        <label class="form-label" >Image</label>
+                        {% render_field form.note  class="form-control" placeholder="form.note" %}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" >NOTE</label>
+                        {% render_field form.text  class="form-control" placeholder="form.tex1t" %}
+                    </div>
+                    <div class="text-center">
+                        <button type="submit"  class="btn btn-primary"  class="btn btn-start-order">Save</button>
+                            <a   href="{% url 'shift' %}"  class="btn btn-primary" >Calender page</a>
+                    </div>
+                </form>
+
+          </div>
+
+            <!-- <span class="hide">
+                    <a> <i class="fa fa-edit"></i></a>
+                  </span> -->
+            </p>
+          </div>
+          
+        </div>
+
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+</div> <!-- End Modal Body -->
+</div> <!-- End Modal Content -->
+</div><!-- modal-dialog -->
+</div>
+{% endblock content %}

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=1024">    
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Connecteam</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'assets/css/sb-admin-2.min.css' %}" rel="stylesheet">
+    <style>
+        .filterDiv {
+            float: left;
+            background-color: #2196F3;
+            color: #ffffff;
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+            margin: 2px;
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .container {
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        /* Style the buttons */
+        .btn {
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            background-color: white;
+            cursor: pointer;
+            color: #2998ff;
+            border: 1px solid #d9d9d9;
+        }
+
+        .btn:hover {
+            background-color: #ddd;
+        }
+
+        .btn.active {
+            background-color: #666;
+        }
+
+        .btn {
+            border-radius: 25px;
+            background-color: white;
+            width: 250px;
+            height: 50px;
+            margin-right: 16px;
+            color: #2998ff;
+            border: 1px solid #d9d9d9;
+
+        }
+
+        .btn1 {
+            border-radius: 25px;
+            background-color: white;
+            margin-right: 16px;
+            color: #2998ff;
+            border: 1px solid #d9d9d9;
+        }
+
+        .btn2 {
+            border-radius: 25px;
+            background-color: purple;
+            margin-right: 16px;
+            color: white;
+            border: 1px solid #d9d9d9;
+
+        }
+
+        .btn1, .btn2 {
+            padding: 10px 15px;
+            font-size: 12px;
+        }
+
+        .button button {
+            width: 200px;
+
+        }
+
+        .row .search-container {
+            float: right;
+        }
+
+        .search {
+            background-color: white;
+
+        }
+
+        .row input[type=text] {
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+            border: 1px solid #d9d9d9;
+            border-radius: 25px;
+        }
+
+        .row .search-container button {
+            float: right;
+            padding: 6px 10px;
+            margin-top: 8px;
+            margin-right: 16px;
+            background: white;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .row .search-container button:hover {
+            background: #ccc;
+        }
+
+        .card-group {
+            margin-left: 25px;
+            border-radius: 20px;
+            margin-top: 60px;
+            width: 300px;
+        }
+
+        #archived {
+            height: 100% !important;
+
+        }
+
+        @media screen and (width: 814px) {
+            #page-top{
+                width: 100%;
+                font-size: 1.5em; 
+            }
+           
+            .align-items-center{
+                display: none;
+            }
+            
+}
+    </style>
+</head>
+
+<body id="page-top" >
+    <!-- Page Wrapper -->
+    <div id="wrapper"  >
+        <!-- Sidebar -->
+        {% include "snippets/sidebar.html" %}
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div class="d-flex flex-column"  >
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{request.user}}</span>
+                                <img class="img-profile rounded-circle"
+                                    src="{% static 'assets/img/undraw_profile.svg' %}">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                             
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid" >
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    </div>
+                    <!-- Content Row -->
+                    <div class="row" >
+                        <div class="col-xl-12 col-md-12 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-1">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                <!-- <img src="{% static 'assets/img/icons8-user-100.png' %}"
+                                                    style="width: 30px;" alt="Person"> -->
+
+                                                <span style="font-size: 12px" class="span">Job scheduling lobby</span>
+                                            </div>
+
+                                        </div>
+
+                                        <div>
+                                            <button class="btn1">Mobile Preview</button>
+                                        </div>
+                                        <div>
+                                            <button class="btn2">Learn about this Featurs</button>
+                                        </div>
+                                        <!-- <div>
+                                            <button class="btn">Import User</button>
+                                        </div> -->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- add filter here -->
+
+
+                        <div class="row" style="width: 100%;margin-left: 1px;" id="archived">
+
+                            <!-- Area Chart -->
+                            <div class="col-xl-12">
+                                <div class="card shadow mb-4" style="height: 500px;">
+                                    <div class="button" style="margin: 10px; padding: 10px 15px; ">
+                                        <button  class="btn1"
+                                            onclick="myFunction()">Active</button>
+                                        <button  class="btn1"
+                                            onclick="myFunction1()">Archived</button>
+
+                                    </div>
+                                    <!-- Card Header - Dropdown -->
+                                        <div class="col-4">
+                                        <div class="card-group" style="z-index: 99999;">
+                                            <div class="card">
+                                                <img class="card-img-top" src="..." alt="Card image cap">
+                                                <div class="card-body">
+                                                    |<h6>Job scheduling</h6>
+                                                    <h5 class="card-title">Job scheduler</h5>
+                                                    <p class="card-text">Assigned
+                                                        <button
+                                                            style="border-radius: 25px;width: 85px;margin-left: 5px;">All
+                                                            users</button></p>
+                                                    <p class="card-text">Admins <img src="{{ request.user.image }}">{{request.user}}</p>
+                                                    <hr><button
+                                                        style="border-radius: 25px;background-color: white; border: 1px solid #d9d9d9;">...</button>
+                                                        <a href="{% url 'shift' %}" id="test1" style="width:200px;border-radius: 55px;color: white;margin-left: 10px;"><button style="width:150px;height:50px;border-radius: 55px;background-color: #f0c14b;color: white;margin-left: 10px;">Access scheduler</button> </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="archived" style="opacity: 0; height: 0px;" class="row">
+                                        <div class="col-4">
+                                            <button class="btn"
+                                                style="margin-top: 5px;margin-left: 10px;">Filter</span></button>
+                                        </div>
+                                        <div class="col-4">
+
+                                            <div class="search-container">
+                                                <form action="/action_page.php">
+                                                    <input type="text" placeholder="Search.." name="search">
+                                                    <button type="submit" class="search"><i
+                                                            class="fa fa-search"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- /.container-fluid -->
+
+            </div>
+        </div>
+        <!-- End of Content Wrapper -->
+
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary1" href="{% url 'login' %}" style="margin-right: 100px;">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'assets/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'assets/js/sb-admin-2.min.js' %}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{% static 'assets/vendor/chart.js/Chart.min.js' %}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{% static 'assets/js/demo/chart-area-demo.js' %}"></script>
+    <script src="{% static 'assets/js/demo/chart-pie-demo.js' %}"></script>
+    <script>
+        filterSelection("all")
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("column");
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                w3RemoveClass(x[i], "show");
+                if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+            }
+        }
+
+        function w3AddClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                if (arr1.indexOf(arr2[i]) == -1) { element.className += " " + arr2[i]; }
+            }
+        }
+
+        function w3RemoveClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                while (arr1.indexOf(arr2[i]) > -1) {
+                    arr1.splice(arr1.indexOf(arr2[i]), 1);
+                }
+            }
+            element.className = arr1.join(" ");
+        }
+
+
+        // Add active class to the current button (highlight it)
+        var btnContainer = document.getElementById("myBtnContainer");
+        var btns = btnContainer.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+    </script>
+    <script>
+        function myFunction() {
+            nextdiv = $('#demo');
+            nextdiv.css("opacity", 1);
+            nextdiv.css("height", "160px");
+
+        }
+    </script>
+    <script>
+        function myFunction1() {
+            nextdiv1 = $('#archived');
+            nextdiv1.css("opacity", 2);
+            nextdiv1.css("height", "160px");
+
+        }
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container" style="margin-top: 8%;">
+	<main id="main">
+		<div class="container" style="table-layout: display; width:600px; margin-bottom:10%;">
+			<div class="card" style="padding-left: 2%; padding-right:2%; padding-top:2%; padding-bottom:2%; background-color:rgb(217, 231, 231)">
+				<div class="wrap-login100 p-t-90 p-b-30">
+					<form action="." method="post">
+						{% csrf_token %}
+						{% bootstrap_form form %}
+						<button class="btn btn-primary btn-rounded" type="submit">Sign up</button>
+						<p style="font-size: medium;">If you have alredy registered please login</p>
+						<a href="{% url 'account_login' %}" class="btn btn-outline-primary waves-effect">Login</a>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main>
+</div>
+</div>
+{% endblock %}

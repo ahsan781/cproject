@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=<form>
+      
+</head>
+<body>
+    <div class="container" >
+        <div class="row" style="margin-top:25px;padding-left: 30px;margin-right: 30px;">
+            <form method="POST">
+              <table class="table table-striped" id=""  cellspacing="0" cellpadding="0" >
+                 {% csrf_token %}
+                    <tbody class="appending_div">
+                            <tr>
+                                <td>date: <input type="date" name="date" required></td>
+                                <td>start_time:  <input type="time" name="start_time" required></td>
+                                <td>end_time: <input type="time" name="end_time" required> </td>
+                                <td>title<input type="text" name="title" required> </td>
+                               
+                                <td><label>user</label>
+
+                                    <select  name="username">
+                                        {% for users in member  %}
+                                        <option value="{{ users.name }}">{{ users.name}}</option>
+                                        {% endfor %}
+
+                                    </select>
+                                    </td>
+                                <td>location<input type="text" name="location" required> </td>
+                                <td>Text<input type="text" name="text"> </td>
+                                <td>note<input type="file" name="note"> </td>
+
+
+
+
+                            </tr>
+                    </tbody>
+                </table>
+                <button type="submit">Add</button>
+            </form>
+            <a class="nav-link text-center add" href="#"> <i
+                class="fa fa-plus"></i> Add More</a>
+            </div>
+            <div class="form-check ml-3">
+                <input type="checkbox" class="form-check-input"
+                    id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Send an
+                    invite</label>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                var i = 1;
+                $('.add').on('click', function() {
+                    var field = ` <tr>
+                                  <td>date: <input type="date" name="date"></td>
+                                  <td>start_time:  <input type="time" name="start_time"></td>
+                                  <td>end_time: <input type="time" name="end_time"> </td>
+                                  <td>title<input type="text" name="title"> </td>
+                                  
+                                  <td>user
+                                    <select   name="username">
+                                        {% for user in member  %}
+                                        <option value="{{ user.name }}">{{ user.name }}</option>
+                                        {% endfor %}
+
+                                    </select> </td>
+                                  <td>location<input type="text" name="location"> </td>
+                                  <td>Text<input type="text" name="text"> </td>
+                                  <td>Note<input type="file" name="note"> </td>
+                                 
+
+                                 </tr>`;
+                    $('.appending_div').append(field);
+                    i = i+1;
+                })
+                })
+        </script>
+          
+
+    
+</body>
+</html>
